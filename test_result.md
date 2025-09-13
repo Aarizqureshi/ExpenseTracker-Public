@@ -268,6 +268,18 @@ frontend:
         agent: "main"
         comment: "Added CSV and PDF export buttons with proper file download handling"
 
+  - task: "Currency Settings UI"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Built currency selection modal, formatting utility, and integrated currency display throughout dashboard and transactions. Supports 20 international currencies with proper symbols and formatting."
+
 metadata:
   created_by: "main_agent"
   version: "1.0"

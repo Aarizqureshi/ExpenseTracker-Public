@@ -462,6 +462,52 @@ async def get_categories():
         ]
     }
 
+# Currency endpoints
+@api_router.get("/currencies")
+async def get_currencies():
+    """Get available currencies"""
+    return {
+        "currencies": [
+            {"code": "USD", "name": "US Dollar", "symbol": "$"},
+            {"code": "EUR", "name": "Euro", "symbol": "€"},
+            {"code": "GBP", "name": "British Pound", "symbol": "£"},
+            {"code": "JPY", "name": "Japanese Yen", "symbol": "¥"},
+            {"code": "CAD", "name": "Canadian Dollar", "symbol": "C$"},
+            {"code": "AUD", "name": "Australian Dollar", "symbol": "A$"},
+            {"code": "CHF", "name": "Swiss Franc", "symbol": "CHF"},
+            {"code": "CNY", "name": "Chinese Yuan", "symbol": "¥"},
+            {"code": "SEK", "name": "Swedish Krona", "symbol": "kr"},
+            {"code": "NZD", "name": "New Zealand Dollar", "symbol": "NZ$"},
+            {"code": "MXN", "name": "Mexican Peso", "symbol": "$"},
+            {"code": "SGD", "name": "Singapore Dollar", "symbol": "S$"},
+            {"code": "HKD", "name": "Hong Kong Dollar", "symbol": "HK$"},
+            {"code": "NOK", "name": "Norwegian Krone", "symbol": "kr"},
+            {"code": "INR", "name": "Indian Rupee", "symbol": "₹"},
+            {"code": "KRW", "name": "South Korean Won", "symbol": "₩"},
+            {"code": "RUB", "name": "Russian Ruble", "symbol": "₽"},
+            {"code": "BRL", "name": "Brazilian Real", "symbol": "R$"},
+            {"code": "ZAR", "name": "South African Rand", "symbol": "R"},
+            {"code": "PLN", "name": "Polish Zloty", "symbol": "zł"}
+        ]
+    }
+
+@api_router.put("/user/settings", response_model=User)
+async def update_user_settings(settings: UserSettings, request: Request):
+    """Update user settings"""
+    user = await get_current_user(request)
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    # Update user currency
+    await db.users.update_one(
+        {"id": user.id},
+        {"$set": {"currency": settings.currency}}
+    )
+    
+    # Return updated user
+    updated_user = await db.users.find_one({"id": user.id})
+    return User(**updated_user)
+
 # Include the router in the main app
 app.include_router(api_router)
 

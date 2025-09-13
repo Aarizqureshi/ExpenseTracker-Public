@@ -40,7 +40,11 @@ class User(BaseModel):
     email: str
     name: str
     picture: str
+    currency: str = "USD"  # Default currency
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class UserSettings(BaseModel):
+    currency: str
 
 class UserSession(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))

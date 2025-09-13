@@ -246,6 +246,7 @@ const LoginPage = () => {
 
 // Dashboard Component
 const Dashboard = () => {
+  const { user, currencies } = useAuth();
   const [stats, setStats] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [monthlyData, setMonthlyData] = useState({});
@@ -320,7 +321,9 @@ const Dashboard = () => {
             </div>
             <div>
               <p className="text-sm font-medium text-gray-600">Total Income</p>
-              <p className="text-2xl font-bold text-green-600">${stats?.total_income?.toFixed(2) || '0.00'}</p>
+              <p className="text-2xl font-bold text-green-600">
+                {formatCurrency(stats?.total_income || 0, user?.currency, currencies)}
+              </p>
             </div>
           </div>
         </div>
@@ -334,7 +337,9 @@ const Dashboard = () => {
             </div>
             <div>
               <p className="text-sm font-medium text-gray-600">Total Expenses</p>
-              <p className="text-2xl font-bold text-red-600">${stats?.total_expenses?.toFixed(2) || '0.00'}</p>
+              <p className="text-2xl font-bold text-red-600">
+                {formatCurrency(stats?.total_expenses || 0, user?.currency, currencies)}
+              </p>
             </div>
           </div>
         </div>
@@ -349,7 +354,7 @@ const Dashboard = () => {
             <div>
               <p className="text-sm font-medium text-gray-600">Balance</p>
               <p className={`text-2xl font-bold ${stats?.balance >= 0 ? 'text-blue-600' : 'text-yellow-600'}`}>
-                ${stats?.balance?.toFixed(2) || '0.00'}
+                {formatCurrency(stats?.balance || 0, user?.currency, currencies)}
               </p>
             </div>
           </div>
@@ -433,7 +438,7 @@ const Dashboard = () => {
                   <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
                     transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
                   }`}>
-                    ${transaction.amount.toFixed(2)}
+                    {formatCurrency(transaction.amount, user?.currency, currencies)}
                   </td>
                 </tr>
               ))}

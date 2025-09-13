@@ -266,9 +266,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you encounter any issues or have questions:
 
-1. **Check the Issues** - Look for existing solutions
-2. **Create an Issue** - Describe your problem in detail
-3. **Join Discussions** - Connect with the community
+1. ** MAIL ** : Aarizqureshi.20211081@gmail.com
 
 ## 🌟 Star History
 

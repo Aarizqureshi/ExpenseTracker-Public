@@ -16,9 +16,18 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [currencies, setCurrencies] = useState([]);
 
   useEffect(() => {
     const initializeAuth = async () => {
+      // Load currencies
+      try {
+        const currenciesRes = await axios.get(`${API}/currencies`);
+        setCurrencies(currenciesRes.data.currencies);
+      } catch (error) {
+        console.error('Failed to load currencies:', error);
+      }
+
       // Check for session_id in URL fragment
       const fragment = window.location.hash.substring(1);
       const params = new URLSearchParams(fragment);
@@ -74,8 +83,19 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateUserSettings = async (settings) => {
+    try {
+      const response = await axios.put(`${API}/user/settings`, settings, { withCredentials: true });
+      setUser(response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Failed to update settings:', error);
+      throw error;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, currencies, updateUserSettings }}>
       {children}
     </AuthContext.Provider>
   );

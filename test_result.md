@@ -195,6 +195,18 @@ backend:
         agent: "testing"
         comment: "✅ Monthly analytics API fully functional. GET /analytics/monthly endpoint properly implemented with authentication required. Endpoint correctly returns 401 for unauthorized access. Monthly data aggregation for Chart.js visualizations implemented correctly with proper date range handling."
 
+  - task: "Categories endpoint"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Categories endpoint fully functional. GET /categories endpoint (public, no auth required) working perfectly. Returns comprehensive lists: 13 expense categories (Food & Dining, Transportation, Shopping, Entertainment, Bills & Utilities, Healthcare, Education, Travel, Home & Garden, Personal Care, Gifts & Donations, Business, Others) and 7 income categories (Salary, Freelance, Investment, Business, Rental, Gifts, Others). Proper JSON structure with expense_categories and income_categories arrays."
+
 frontend:
   - task: "Authentication UI"
     implemented: true

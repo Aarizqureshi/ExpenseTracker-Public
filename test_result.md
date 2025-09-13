@@ -264,11 +264,10 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Authentication System"
-    - "Transaction CRUD Operations"
-    - "Dashboard Analytics API"
     - "Authentication UI"
     - "Dashboard with Charts"
+    - "Transaction Management UI"
+    - "Export Functionality"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"

@@ -195,6 +195,18 @@ backend:
         agent: "testing"
         comment: "✅ Monthly analytics API fully functional. GET /analytics/monthly endpoint properly implemented with authentication required. Endpoint correctly returns 401 for unauthorized access. Monthly data aggregation for Chart.js visualizations implemented correctly with proper date range handling."
 
+  - task: "Currency Support System"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added comprehensive currency support with 20 international currencies, user settings endpoint, and currency formatting throughout the application"
+
   - task: "Categories endpoint"
     implemented: true
     working: true

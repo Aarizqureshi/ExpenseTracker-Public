@@ -292,6 +292,8 @@ test_plan:
     - "Dashboard with Charts"
     - "Transaction Management UI"
     - "Export Functionality"
+    - "Currency Support System"
+    - "Currency Settings UI"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"

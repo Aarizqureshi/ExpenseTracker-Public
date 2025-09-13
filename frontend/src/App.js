@@ -452,6 +452,7 @@ const Dashboard = () => {
 
 // Transactions Component
 const Transactions = () => {
+  const { user, currencies } = useAuth();
   const [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState({ expense_categories: [], income_categories: [] });
   const [loading, setLoading] = useState(true);
@@ -628,7 +629,7 @@ const Transactions = () => {
                 <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
                   transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
                 }`}>
-                  ${transaction.amount.toFixed(2)}
+                  {formatCurrency(transaction.amount, user?.currency, currencies)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <button
